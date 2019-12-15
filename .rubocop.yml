@@ -1,0 +1,8 @@
+inherit_gem:
+  rubocop-nosolosoftware:
+    - rubocop-default.yml
+    - rubocop-rake.yml
+    - rubocop-rspec.yml
+
+AllCops:
+  TargetRubyVersion: 2.6.5

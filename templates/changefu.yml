@@ -1,0 +1,9 @@
+# Changefu configuration file https://github.com/javierav/changefu
+
+use_git_mv: true
+format: markdown
+language: es
+skip_author: true
+skip_generate: false
+compare_url: https://github.com/javierav/changefu/compare/{prev_tag}...{current_tag}
+author_url: https://github.com/{username}

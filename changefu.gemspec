@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   #
   s.name        = 'changefu'
   s.version     = Changefu.version
-  s.summary     = 'Tool for keep a changelog'
-  s.description = 'Command line utility to help to keep a good changelog'
+  s.summary     = 'A tool for keep a changelog'
+  s.description = 'Command-line utility that help you to keep a good changelog'
   s.homepage    = 'https://github.com/javierav/changefu'
   s.license     = 'MIT'
 
@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   #
   ## GEM
   #
-  s.files        = Dir['lib/**/*', 'LICENSE', 'Rakefile', 'README.md', 'Gemfile*']
+  s.files        = Dir['lib/**/*', 'exe/*', 'LICENSE', 'Rakefile', 'README.md', 'Gemfile*']
   s.require_path = 'lib'
   s.bindir       = 'exe'
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
@@ -48,4 +48,11 @@ Gem::Specification.new do |s|
   #
   s.platform              = Gem::Platform::RUBY
   s.required_ruby_version = Changefu.required_ruby_version
+
+  #
+  ## DEPENDENCIES
+  #
+  s.add_dependency 'pastel', '~> 0.7', '>= 0.7.3'
+  s.add_dependency 'thor', '~> 0.20', '>= 0.20.3'
+  s.add_dependency 'tty-table', '~> 0.11', '>= 0.11.0'
 end

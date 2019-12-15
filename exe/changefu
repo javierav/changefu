@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 
+require 'pathname'
+
+source_path = (Pathname.new(__FILE__).dirname + '../lib').expand_path.to_s
+$LOAD_PATH.unshift(source_path) unless $LOAD_PATH.include?(source_path)
+
 require 'changefu'
 
-Changefu::Executable.run
+Changefu::CLI.start(ARGV)
