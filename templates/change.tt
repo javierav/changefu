@@ -1,0 +1,5 @@
+---
+type:<%= " #{config[:type]}" if config[:type] %>
+title:<%= " #{config[:title]}" if config[:title] %>
+username:<%= " #{config[:username]}" if config[:username] %>
+issue:<%= " #{config[:issue]}" if config[:issue] %>

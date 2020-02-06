@@ -1,9 +1,50 @@
-# Changefu configuration file https://github.com/javierav/changefu
+---
+# ChangeFu configuration file https://github.com/javierav/changefu
 
+#
+# layout
+#
+header: |
+  All notable changes to this project will be documented in this file.
+
+  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+  and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+footer: |
+  This changelog was generated using [ChangeFu](https://github.com/javierav/changefu).
+
+#
+## urls
+#
+issue_url: https://github.com/javierav/changefu/issues/{issue}
+username_url: https://github.com/{username}
+
+#
+## types
+#
+types:
+  added: Added
+  changed: Changed
+  deprecated: Deprecated
+  fixed: Fixed
+  removed: Removed
+  security: Security
+
+#
+## formats
+#
+formats:
+  markdown: true
+  json: true
+
+#
+## filenames
+#
+filenames:
+  markdown: 'CHANGELOG.md'
+  json: '.changelog.json'
+
+#
+## options
+#
+include_unreleased: true
 use_git_mv: true
-format: markdown
-language: es
-skip_author: true
-skip_generate: false
-compare_url: https://github.com/javierav/changefu/compare/{prev_tag}...{current_tag}
-author_url: https://github.com/{username}

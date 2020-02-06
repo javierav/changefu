@@ -1,25 +1,47 @@
+require 'yaml'
+
 module Changefu
-  # This class represents an entry in the changelog
-  #
-  # @since 0.0.1
   class Change
-    # @return [Symbol] the type of the changelog entry
-    attr_reader :type
+    attr_accessor :timestamp, :type, :title, :username, :issue, :path
 
-    # @return [String] the title of the changelog entry
-    attr_reader :title
+    def self.from_file(path)
+      data = YAML.safe_load(File.read(path), symbolize_names: true)
+      timestamp = path.basename('.yml').to_s.split('_').first
 
-    # @return [String] the name of the author of the changelog entry
-    attr_reader :author_name
+      new(
+        type: data.fetch(:type),
+        title: data.fetch(:title),
+        username: data.fetch(:username),
+        issue: data.fetch(:issue),
+        timestamp: timestamp,
+        path: path
+      )
+    end
 
-    # @return [String] the username of the author of the changelog entry
-    attr_reader :author_username
+    def initialize(attributes={})
+      attributes.each_pair do |key, value|
+        send("#{key}=", value)
+      end
+    end
 
-    def initialize(params={})
-      @type = params.fetch(:title, :added).to_sym
-      @title = params.fetch(:title)
-      @author_name = params.fetch(:author_name)
-      @author_username = params.fetch(:author_username)
+    def issue_to_markdown
+      url = Changefu::Configuration.issue_url
+
+      return unless url
+
+      "[##{issue}](#{url.sub('{issue}', issue.to_s)})"
+    end
+
+    def username_to_markdown
+      url = Changefu::Configuration.username_url
+
+      return unless url
+
+      "([#{username}](#{url.sub('{username}', username)}))"
+    end
+
+    def to_hash
+      {title: title, username: username, issue: issue}
     end
   end
 end

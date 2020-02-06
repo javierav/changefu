@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
   #
   ## DEPENDENCIES
   #
-  s.add_dependency 'pastel', '~> 0.7', '>= 0.7.3'
-  s.add_dependency 'thor', '~> 0.20', '>= 0.20.3'
+  s.add_dependency 'activesupport', '> 5.0'
+  s.add_dependency 'thor', '~> 1.0', '>= 1.0.1'
   s.add_dependency 'tty-table', '~> 0.11', '>= 0.11.0'
 end

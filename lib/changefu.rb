@@ -1,17 +1,22 @@
 require 'pathname'
-require 'changefu/cli'
-require 'changefu/configuration'
-require 'changefu/release'
-require 'changefu/version'
+require 'active_support/core_ext/object'
+require 'active_support/core_ext/string'
+require 'active_support/json'
 
 module Changefu
-  def self.get_file(path)
-    file_path = Pathname.pwd.join(path)
+  def self.path_helper(path)
+    Pathname.pwd.join(path)
+  end
 
-    unless file_path.exist?
-      abort 'You must execute Changefu from the root directory of the project!'
-    end
+  def self.path_helper!(path)
+    path = path_helper(path)
 
-    file_path
+    return path if path.exist?
+
+    abort "File #{path} cannot be found!" if path.file?
+    abort "Directory #{path} cannot be found!" if path.directory?
   end
 end
+
+require 'changefu/cli'
+require 'changefu/version'

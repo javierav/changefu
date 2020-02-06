@@ -1,0 +1,16 @@
+<%
+  changelog = {}
+
+  if unreleased.present? && include_unreleased
+    changelog[:unreleased] = {}
+
+    unreleased.each do |group|
+      changelog[:unreleased][group.type] = group.changes.map(&:to_hash)
+    end
+  end
+
+  if releases.present?
+    changelog[:releases] = releases.map(&:to_hash)
+  end
+%>
+<%= ::JSON.pretty_generate changelog, quirks_mode: true, max_nesting: false %>

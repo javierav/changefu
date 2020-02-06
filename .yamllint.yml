@@ -1,0 +1,16 @@
+# https://yamllint.readthedocs.io/en/stable/index.html
+extends: "default"
+
+rules:
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.document_start
+  document-start:
+    present: false
+
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.key_ordering
+  key-ordering: "enable"
+
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.line_length
+  line-length: "disable"
+
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.quoted_strings
+  quoted-strings: "disable"

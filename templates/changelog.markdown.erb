@@ -1,0 +1,43 @@
+# Changelog
+<% if header %>
+
+<%= header %>
+<% end %>
+
+<% if unreleased.present? && include_unreleased %>
+<%= "## Unreleased" %>
+<% unreleased.each do |group| %>
+
+
+### <%= group.humanized_name %>
+<% group.changes.each do |change| %>
+
+- <%= change.title %>
+<% if change.issue %> <%= change.issue_to_markdown %><% end %>
+<% if change.username %> <%= change.username_to_markdown %><% end %>
+<% end # group.changes.each %>
+<% end # unreleased.each %>
+<% end # if unreleased.present? %>
+<% if releases.present? %>
+<% releases.each do |release| %>
+
+
+## <%= release.version %> - <%= release.date %>
+<% release.changes_by_type.each do |group| %>
+
+
+### <%= group.humanized_name %>
+<% group.changes.each do |change| %>
+
+- <%= change.title %>
+<% if change.issue %> <%= change.issue_to_markdown %><% end %>
+<% if change.username %> <%= change.username_to_markdown %><% end %>
+<% end # group.changes.each %>
+<% end # release.changes_by_type.each %>
+<% end # releases.each %>
+<% end # if releases.present? %>
+<% if footer %>
+
+
+<%= footer %>
+<% end %>
