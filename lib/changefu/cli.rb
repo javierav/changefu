@@ -34,18 +34,10 @@ module Changefu
     end
 
     desc 'generate', 'Generates changelog files'
-    option :markdown, type: :boolean,
-                      default: Changefu::Configuration.formats.try(:[], :markdown) || false
-    option :json, type: :boolean,
-                  default: Changefu::Configuration.formats.try(:[], :json) || false
-    option 'markdown-filename', type: :string,
-                                default: Changefu::Configuration.filenames.try(
-                                  :[], :markdown
-                                ) || 'CHANGELOG.md'
-    option 'json-filename', type: :string,
-                            default: Changefu::Configuration.filenames.try(
-                              :[], :json
-                            ) || '.changelog.json'
+    option :markdown, type: :boolean
+    option :json, type: :boolean
+    option 'markdown-filename', type: :string
+    option 'json-filename', type: :string
     def generate
       require_changefu!
       generate_changelog!
@@ -55,18 +47,10 @@ module Changefu
     option :date, type: :string
     option :tag, type: :string
     option :generate, type: :boolean, default: true
-    option :markdown, type: :boolean,
-                      default: Changefu::Configuration.formats.try(:[], :markdown) || false
-    option :json, type: :boolean,
-                  default: Changefu::Configuration.formats.try(:[], :json) || false
-    option 'markdown-filename', type: :string,
-                                default: Changefu::Configuration.filenames.try(
-                                  :[], :markdown
-                                ) || 'CHANGELOG.md'
-    option 'json-filename', type: :string,
-                            default: Changefu::Configuration.filenames.try(
-                              :[], :json
-                            ) || '.changelog.json'
+    option :markdown, type: :boolean
+    option :json, type: :boolean
+    option 'markdown-filename', type: :string
+    option 'json-filename', type: :string
     def release(version)
       require_changefu!
 
@@ -115,15 +99,35 @@ module Changefu
     private
 
     def generate_changelog!
-      if options[:markdown]
-        Changefu::Changelog.generate!(:markdown, options['markdown-filename'])
-        say_status :created, options['markdown-filename']
+      if option_markdown
+        Changefu::Changelog.generate!(:markdown, option_markdown_filename)
+        say_status :created, option_markdown_filename
       end
 
-      return unless options[:json]
+      return unless option_json
 
-      Changefu::Changelog.generate!(:json, options['json-filename'])
-      say_status :created, options['json-filename']
+      Changefu::Changelog.generate!(:json, option_json_filename)
+      say_status :created, option_json_filename
+    end
+
+    def option_markdown
+      default = Changefu::Configuration.formats.try(:[], :markdown) || false
+      options.key?('markdown') ? options['markdown'] : default
+    end
+
+    def option_json
+      default = Changefu::Configuration.formats.try(:[], :json) || false
+      options.key?('json') ? options['json'] : default
+    end
+
+    def option_markdown_filename
+      default = Changefu::Configuration.filenames.try(:[], :markdown) || 'CHANGELOG.md'
+      options.key?('markdown-filename') ? options['markdown-filename'] : default
+    end
+
+    def option_json_filename
+      default = Changefu::Configuration.filenames.try(:[], :json) || '.changelog.json'
+      options.key?('json-filename') ? options['json-filename'] : default
     end
   end
 end

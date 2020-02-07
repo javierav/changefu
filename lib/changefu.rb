@@ -13,8 +13,7 @@ module Changefu
 
     return path if path.exist?
 
-    abort "File #{path} cannot be found!" if path.file?
-    abort "Directory #{path} cannot be found!" if path.directory?
+    abort "#{path} cannot be found!"
   end
 end
 
