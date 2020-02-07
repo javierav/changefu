@@ -1,0 +1,31 @@
+name: Testing
+on: [push,pull_request]
+
+jobs:
+  rspec:
+    name: RSpec
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.5
+
+      - name: Install dependencies
+        run: |
+          gem install bundler -v "$(cat Gemfile.lock | tail -1 | tr -d ' ')" --force
+          bundle install --jobs $(nproc) --retry 3
+
+      - name: Run tests
+        run: |
+          bin/rspec
+
+      - name: Upload coverage results
+        uses: actions/upload-artifact@master
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage

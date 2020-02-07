@@ -1,4 +1,8 @@
 require 'bundler/setup'
+require 'simplecov'
+
+SimpleCov.start 'test_frameworks'
+
 require 'changefu'
 
 RSpec.configure do |config|
