@@ -30,7 +30,7 @@ module Changefu
       timestamp = Time.now.strftime('%Y%m%d%H%M%S')
       template 'change.tt',
                "changelog/unreleased/#{timestamp}_#{title.parameterize(separator: '_')}.yml",
-               options.merge(title: title, username: username, issue: issue)
+               options.merge(title: title, username: options[:username], issue: options[:issue])
     end
 
     desc 'generate', 'Generates changelog files'

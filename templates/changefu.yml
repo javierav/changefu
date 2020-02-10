@@ -15,7 +15,7 @@ footer: |
 #
 ## urls
 #
-issue_url: https://github.com/javierav/changefu/issues/{issue}
+issue_url: https://github.com/username/project/issues/{issue}
 username_url: https://github.com/{username}
 
 #
@@ -34,7 +34,7 @@ types:
 #
 formats:
   markdown: true
-  json: true
+  json: false
 
 #
 ## filenames
