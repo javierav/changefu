@@ -1,0 +1,6 @@
+---
+header: header example
+include_unreleased: true
+use_git_mv: true
+issue_url: https://github.com/username/project/issues/{issue}
+username_url: https://github.com/{username}

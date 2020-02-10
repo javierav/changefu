@@ -1,9 +1,13 @@
 require 'bundler/setup'
 require 'simplecov'
 
-SimpleCov.start 'test_frameworks'
+SimpleCov.start 'test_frameworks' do
+  # minimum_coverage 90
+end
 
 require 'changefu'
+
+Dir[Pathname.new(__dir__).join('support/**/*.rb')].sort.each { |f| require f }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
