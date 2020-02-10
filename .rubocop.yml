@@ -6,6 +6,8 @@ inherit_gem:
 
 AllCops:
   TargetRubyVersion: 2.6.5
+  Exclude:
+    - "**/bin/**/*"
 
 Layout/HeredocIndentation:
   Enabled: false
@@ -14,7 +16,7 @@ Style/MethodMissingSuper:
   Enabled: false
 
 Style/SpecialGlobalVars:
-  EnforcedStyle: use_perl_names
+  Enabled: false
 
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining

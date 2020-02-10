@@ -1,14 +1,10 @@
-name: Testing
+name: Audit
 on: [push,pull_request]
 
 jobs:
-  rspec:
-    name: "RSpec with Ruby ${{ matrix.ruby }} on ${{ matrix.os }}"
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        ruby: [ '2.5', '2.6', '2.7' ]
-        os: [ 'ubuntu-latest', 'macos-latest']
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
@@ -16,7 +12,7 @@ jobs:
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: 2.6
 
       - name: Cache gems
         uses: actions/cache@v1
@@ -30,15 +26,8 @@ jobs:
         run: |
           gem install bundler -v "$(cat Gemfile.lock | tail -1 | tr -d ' ')" --force
           bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
+          bundle install --jobs $(nproc) --retry 3
 
-      - name: Run tests
+      - name: Run Rubocop
         run: |
-          bin/rspec
-
-      - name: Upload coverage results
-        uses: actions/upload-artifact@master
-        if: always()
-        with:
-          name: coverage-report
-          path: coverage
+          bin/rubocop -D lib/
